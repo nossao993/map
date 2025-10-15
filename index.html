@@ -1,0 +1,202 @@
+x<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Карта зарплат IT в России</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet'>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        .marker {
+            cursor: pointer;
+            border: 2px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .mapboxgl-popup-content {
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .city-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .salary {
+            font-size: 22px;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .count {
+            font-size: 12px;
+            color: #666;
+        }
+        .legend {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            position: absolute;
+            bottom: 30px;
+            right: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+        .legend h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+        .legend-item {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        .legend-color {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1;
+            max-width: 280px;
+        }
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0 0 4px 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header-subtitle {
+            font-size: 13px;
+            color: #7f8c8d;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            background: #414141;
+            padding: 8px 14px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            z-index: 1;
+        }
+        .footer a {
+            font-size: 12px;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            transition: color 0.2s;
+         }
+        .footer a:visited {
+            color: #ffffff;  
+        }
+        .footer a:hover {
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+<div class='header'>
+    <h1 class='header-title'>Карта зарплат IT в России</h1>
+    <p class='header-subtitle'>Медианная зарплата по городам</p>
+</div>
+<div class='footer'>
+    <a href='http://t.me/gradesTrackerBot' target='_blank'>by grades 2025</a>
+</div>
+<div id='map'></div>
+<div class='legend'>
+    <h4>Медианная зарплата</h4>
+    <div class='legend-item'><span class='legend-color' style='background:#ffeb3b'></span>< 200K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#ffb74d'></span>200-250K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#64b5f6'></span>250-300K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#81c784'></span>> 300K</div>
+</div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoic2Fmb25vdnYiLCJhIjoiY21ncDd2aTRrMjRwMzJscXFzbWhnaWQyYiJ9.Ogjdume21vx8fFymDc9L-A';
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v11',
+    center: [65, 60],
+    zoom: 3
+});
+
+var cities = [
+    {name: 'Москва', salary: 315000, count: 285, lng: 37.6173, lat: 55.7558},
+    {name: 'Санкт-Петербург', salary: 300000, count: 107, lng: 30.3351, lat: 59.9343},
+    {name: 'Екатеринбург', salary: 255000, count: 24, lng: 60.6122, lat: 56.8389},
+    {name: 'Новосибирск', salary: 240000, count: 20, lng: 82.9346, lat: 55.0084},
+    {name: 'Казань', salary: 190000, count: 16, lng: 49.1221, lat: 55.7887},
+    {name: 'Нижний Новгород', salary: 272500, count: 12, lng: 44.0020, lat: 56.2965},
+    {name: 'Воронеж', salary: 350000, count: 11, lng: 39.2003, lat: 51.6720},
+    {name: 'Ростов-на-Дону', salary: 210000, count: 8, lng: 39.7233, lat: 47.2357},
+    {name: 'Краснодар', salary: 295000, count: 6, lng: 38.9769, lat: 45.0355},
+    {name: 'Самара', salary: 316000, count: 6, lng: 50.1155, lat: 53.1952},
+    {name: 'Уфа', salary: 92500, count: 6, lng: 55.9678, lat: 54.7388},
+    {name: 'Пермь', salary: 220000, count: 5, lng: 56.2502, lat: 58.0105},
+    {name: 'Томск', salary: 230000, count: 5, lng: 84.9480, lat: 56.4977},
+    {name: 'Ижевск', salary: 360000, count: 4, lng: 53.2001, lat: 56.8498},
+    {name: 'Волгоград', salary: 371500, count: 4, lng: 44.5133, lat: 48.7080},
+    {name: 'Красноярск', salary: 300000, count: 4, lng: 92.8672, lat: 56.0153},
+    {name: 'Рязань', salary: 145400, count: 4, lng: 39.7129, lat: 54.6269},
+    {name: 'Ульяновск', salary: 190000, count: 4, lng: 48.3866, lat: 54.3142}
+];
+
+function getColor(salary) {
+    if (salary < 200000) return '#ff8a80';
+    if (salary < 250000) return '#ffb74d';
+    if (salary < 300000) return '#81c784';
+    return '#64b5f6';
+}
+
+function getSize(count) {
+    return Math.sqrt(count) * 2 + 8;
+}
+
+map.on('load', function() {
+    cities.forEach(function(city) {
+        var el = document.createElement('div');
+        el.className = 'marker';
+        var size = getSize(city.count);
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.backgroundColor = getColor(city.salary);
+        
+        var popup = new mapboxgl.Popup({ offset: 25 })
+            .setHTML(
+                '<div class="city-name">' + city.name + '</div>' +
+                '<div class="salary">' + city.salary.toLocaleString('ru-RU') + ' ₽</div>' +
+                '<div class="count">На основе ' + city.count + ' записей</div>'
+            );
+        
+        new mapboxgl.Marker(el)
+            .setLngLat([city.lng, city.lat])
+            .setPopup(popup)
+            .addTo(map);
+    });
+});
+</script>
+</body>
+</html>
