@@ -1,4 +1,4 @@
-x<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
@@ -24,23 +24,105 @@ x<!DOCTYPE html>
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .mapboxgl-popup-content {
-            padding: 15px;
-            font-family: Arial, sans-serif;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-width: 280px;
+            border-radius: 12px;
         }
-        .city-name {
-            font-size: 18px;
-            font-weight: bold;
+        .popup-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 16px 20px;
+            border-radius: 12px 12px 0 0;
+        }
+        .popup-city {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 6px 0;
+        }
+        .popup-salary {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            margin: 0;
+        }
+        .popup-count {
+            font-size: 12px;
+            color: rgba(255,255,255,0.85);
+            margin-top: 4px;
+        }
+        .popup-body {
+            padding: 16px 20px;
+        }
+        .popup-section {
+            margin-bottom: 16px;
+        }
+        .popup-section:last-child {
+            margin-bottom: 0;
+        }
+        .popup-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: 8px;
         }
-        .salary {
-            font-size: 22px;
-            color: #27ae60;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .popup-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
         }
-        .count {
-            font-size: 12px;
-            color: #666;
+        .popup-tag {
+            background: #f0f3f7;
+            color: #2c3e50;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .popup-companies {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .popup-company {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .popup-company-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: #f0f3f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #667eea;
+            flex-shrink: 0;
+            object-fit: contain;
+            padding: 2px;
+        }
+        .popup-company-logo-text {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: #f0f3f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #667eea;
+            flex-shrink: 0;
+        }
+        .popup-company-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #2c3e50;
         }
         .legend {
             background: white;
@@ -136,32 +218,61 @@ x<!DOCTYPE html>
 <script>
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2Fmb25vdnYiLCJhIjoiY21ncDd2aTRrMjRwMzJscXFzbWhnaWQyYiJ9.Ogjdume21vx8fFymDc9L-A';
 
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/light-v11',
-    center: [65, 60],
-    zoom: 3
-});
-
 var cities = [
-    {name: 'Москва', salary: 315000, count: 285, lng: 37.6173, lat: 55.7558},
-    {name: 'Санкт-Петербург', salary: 300000, count: 107, lng: 30.3351, lat: 59.9343},
-    {name: 'Екатеринбург', salary: 255000, count: 24, lng: 60.6122, lat: 56.8389},
-    {name: 'Новосибирск', salary: 240000, count: 20, lng: 82.9346, lat: 55.0084},
-    {name: 'Казань', salary: 190000, count: 16, lng: 49.1221, lat: 55.7887},
-    {name: 'Нижний Новгород', salary: 272500, count: 12, lng: 44.0020, lat: 56.2965},
-    {name: 'Воронеж', salary: 350000, count: 11, lng: 39.2003, lat: 51.6720},
-    {name: 'Ростов-на-Дону', salary: 210000, count: 8, lng: 39.7233, lat: 47.2357},
-    {name: 'Краснодар', salary: 295000, count: 6, lng: 38.9769, lat: 45.0355},
-    {name: 'Самара', salary: 316000, count: 6, lng: 50.1155, lat: 53.1952},
-    {name: 'Уфа', salary: 92500, count: 6, lng: 55.9678, lat: 54.7388},
-    {name: 'Пермь', salary: 220000, count: 5, lng: 56.2502, lat: 58.0105},
-    {name: 'Томск', salary: 230000, count: 5, lng: 84.9480, lat: 56.4977},
-    {name: 'Ижевск', salary: 360000, count: 4, lng: 53.2001, lat: 56.8498},
-    {name: 'Волгоград', salary: 371500, count: 4, lng: 44.5133, lat: 48.7080},
-    {name: 'Красноярск', salary: 300000, count: 4, lng: 92.8672, lat: 56.0153},
-    {name: 'Рязань', salary: 145400, count: 4, lng: 39.7129, lat: 54.6269},
-    {name: 'Ульяновск', salary: 190000, count: 4, lng: 48.3866, lat: 54.3142}
+    {name: 'Москва', salary: 315000, count: 285, lng: 37.6173, lat: 55.7558,
+     stacks: ['Backend', 'Java Backend', 'DevOps'],
+     companies: ['Сбер', 'Яндекс', 'VK']},
+    {name: 'Санкт-Петербург', salary: 300000, count: 107, lng: 30.3351, lat: 59.9343,
+     stacks: ['Backend', 'Java Backend', 'DevOps'],
+     companies: ['Т-Банк', 'VK', 'Яндекс']},
+    {name: 'Екатеринбург', salary: 255000, count: 24, lng: 60.6122, lat: 56.8389,
+     stacks: ['Backend', 'React', 'Java Backend'],
+     companies: ['Т-Банк', 'СКБ Контур', 'Сбер']},
+    {name: 'Новосибирск', salary: 240000, count: 20, lng: 82.9346, lat: 55.0084,
+     stacks: ['Backend', 'ЦФТ', 'DevOps'],
+     companies: ['ЦФТ', 'БФТ', 'Дром']},
+    {name: 'Казань', salary: 190000, count: 16, lng: 49.1221, lat: 55.7887,
+     stacks: ['Backend', 'Java Backend', 'DevOps'],
+     companies: ['Т-Банк', 'VK', 'Ozon Tech']},
+    {name: 'Нижний Новгород', salary: 272500, count: 12, lng: 44.0020, lat: 56.2965,
+     stacks: ['Backend', 'API', 'YADRO'],
+     companies: ['YADRO', 'Т-Банк', 'Сбер']},
+    {name: 'Воронеж', salary: 350000, count: 11, lng: 39.2003, lat: 51.6720,
+     stacks: ['Java Backend', 'Backend', '1С'],
+     companies: ['Иннотех', 'Т-Банк', 'Сбер']},
+    {name: 'Ростов-на-Дону', salary: 210000, count: 8, lng: 39.7233, lat: 47.2357,
+     stacks: ['Java Backend', 'React', 'Angular'],
+     companies: ['Лемана ПРО', 'Axenix', 'DATUM Soft']},
+    {name: 'Краснодар', salary: 295000, count: 6, lng: 38.9769, lat: 45.0355,
+     stacks: ['Java Backend', 'API', 'Vue.js'],
+     companies: ['Т-Банк', 'Bell Integrator', 'S7 Airlines']},
+    {name: 'Самара', salary: 316000, count: 6, lng: 50.1155, lat: 53.1952,
+     stacks: ['Backend', 'Java Backend', 'C++'],
+     companies: ['VK', 'Мой Офис', 'МТС финтех']},
+    {name: 'Уфа', salary: 92500, count: 6, lng: 55.9678, lat: 54.7388,
+     stacks: ['Web', 'Backend', 'API'],
+     companies: ['Газпром-нефть', 'ГК БИТ', 'FunBox']},
+    {name: 'Пермь', salary: 220000, count: 5, lng: 56.2502, lat: 58.0105,
+     stacks: ['Java Backend', 'Backend', 'Linux'],
+     companies: ['Газпромбанк', 'Норбит', 'Naumen']},
+    {name: 'Томск', salary: 230000, count: 5, lng: 84.9480, lat: 56.4977,
+     stacks: ['Backend', 'Frontend', 'Web'],
+     companies: ['Газпром ЦПС', 'Aurigma', 'Quantumsoft']},
+    {name: 'Ижевск', salary: 360000, count: 4, lng: 53.2001, lat: 56.8498,
+     stacks: ['Java Backend', 'Mobile', 'React'],
+     companies: ['Банк ПСБ', 'ВТБ', 'icons8']},
+    {name: 'Волгоград', salary: 371500, count: 4, lng: 44.5133, lat: 48.7080,
+     stacks: ['Backend', 'Java Backend', 'DevOps'],
+     companies: ['Т-Банк', 'ПочтаТех', 'Artsofte']},
+    {name: 'Красноярск', salary: 300000, count: 4, lng: 92.8672, lat: 56.0153,
+     stacks: ['Web', '1С', 'Python'],
+     companies: ['VK', 'Полюс', 'Tevian']},
+    {name: 'Рязань', salary: 145400, count: 4, lng: 39.7129, lat: 54.6269,
+     stacks: ['1С', 'Backend', 'Vue.js'],
+     companies: ['Айтигро', 'ГК Автоимпорт', 'Prof-IT Group']},
+    {name: 'Ульяновск', salary: 190000, count: 4, lng: 48.3866, lat: 54.3142,
+     stacks: ['Backend', 'Java Backend', 'Spring Boot'],
+     companies: ['Дион Софт', 'IRLIX', 'MediaSoft']}
 ];
 
 function getColor(salary) {
@@ -175,6 +286,45 @@ function getSize(count) {
     return Math.sqrt(count) * 2 + 8;
 }
 
+function getCompanyInitials(name) {
+    var words = name.split(' ');
+    if (words.length >= 2) {
+        return (words[0][0] + words[1][0]).toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+}
+
+function getCompanyLogo(name) {
+    var logos = {
+        'Сбер': 'https://api.getgrade.ru/uploads/sber_logo_ea734c50d4.png',
+        'Яндекс': 'https://api.getgrade.ru/uploads/Yandex_icon_769222a81d.png',
+        'VK': 'https://api.getgrade.ru/uploads/VK_Logo_33_606560bbb0.png',
+        'Т-Банк': 'https://api.getgrade.ru/uploads/tbanklogo_6219ad61df.png',
+        'СКБ Контур': 'https://api.getgrade.ru/uploads/skbcontur_5a7c5bdd19.png',
+        'ЦФТ': 'https://api.getgrade.ru/uploads/cft_39e01a438e.jpg',
+        'БФТ': 'https://api.getgrade.ru/uploads/bft_0b8d60ed1c.png',
+        'Дром': 'https://api.getgrade.ru/uploads/drom_3515a7244e.png',
+        'Ozon Tech': 'https://api.getgrade.ru/uploads/images_21_9919e5716e.png',
+        'YADRO': 'https://api.getgrade.ru/uploads/yadro_logo_sq_2b7961814a.png',
+        'Иннотех': 'https://api.getgrade.ru/uploads/innotech_64c9de037e.png',
+        'Газпромбанк': 'https://api.getgrade.ru/uploads/images_30_9126efdf9a.png',
+        'Авито': 'https://api.getgrade.ru/uploads/avitologo_316dc7c1d6.png',
+        'Wildberries': 'https://api.getgrade.ru/uploads/images_10_7e80979388.jpeg',
+        'Лаборатория Касперского': 'https://api.getgrade.ru/uploads/kasp_13557e26a0.png',
+        'Мой Офис': 'https://api.getgrade.ru/uploads/sber_logo_ea734c50d4.png',
+        'МТС финтех': 'https://api.getgrade.ru/uploads/sber_logo_ea734c50d4.png'
+    };
+    
+    return logos[name] || null;
+}
+
+map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v11',
+    center: [65, 60],
+    zoom: 3
+});
+
 map.on('load', function() {
     cities.forEach(function(city) {
         var el = document.createElement('div');
@@ -184,12 +334,49 @@ map.on('load', function() {
         el.style.height = size + 'px';
         el.style.backgroundColor = getColor(city.salary);
         
-        var popup = new mapboxgl.Popup({ offset: 25 })
-            .setHTML(
-                '<div class="city-name">' + city.name + '</div>' +
-                '<div class="salary">' + city.salary.toLocaleString('ru-RU') + ' ₽</div>' +
-                '<div class="count">На основе ' + city.count + ' записей</div>'
-            );
+        var stacksHTML = city.stacks.map(function(stack) {
+            return '<span class="popup-tag">' + stack + '</span>';
+        }).join('');
+        
+        var companiesHTML = city.companies.map(function(company) {
+            var logo = getCompanyLogo(company);
+            var logoHTML;
+            
+            if (logo) {
+                logoHTML = '<img src="' + logo + '" class="popup-company-logo" alt="' + company + '" ' +
+                    'onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">' +
+                    '<div class="popup-company-logo-text" style="display:none;">' + getCompanyInitials(company) + '</div>';
+            } else {
+                logoHTML = '<div class="popup-company-logo-text">' + getCompanyInitials(company) + '</div>';
+            }
+            
+            return '<div class="popup-company">' +
+                logoHTML +
+                '<div class="popup-company-name">' + company + '</div>' +
+                '</div>';
+        }).join('');
+        
+        var popup = new mapboxgl.Popup({ 
+            offset: 25,
+            closeButton: false,
+            maxWidth: '320px'
+        }).setHTML(
+            '<div class="popup-header">' +
+                '<div class="popup-city">' + city.name + '</div>' +
+                '<div class="popup-salary">' + city.salary.toLocaleString('ru-RU') + ' ₽</div>' +
+                '<div class="popup-count">На основе ' + city.count + ' записей</div>' +
+            '</div>' +
+            '<div class="popup-body">' +
+                '<div class="popup-section">' +
+                    '<div class="popup-section-title">Топ специализации</div>' +
+                    '<div class="popup-tags">' + stacksHTML + '</div>' +
+                '</div>' +
+                '<div class="popup-section">' +
+                    '<div class="popup-section-title">Топ работодатели</div>' +
+                    '<div class="popup-companies">' + companiesHTML + '</div>' +
+                '</div>' +
+            '</div>'
+        );
         
         new mapboxgl.Marker(el)
             .setLngLat([city.lng, city.lat])
