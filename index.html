@@ -237,10 +237,10 @@
 <div id='map'></div>
 <div class='legend'>
     <h4>Медианная зарплата</h4>
-    <div class='legend-item'><span class='legend-color' style='background:#ffeb3b'></span>< 200K</div>
-    <div class='legend-item'><span class='legend-color' style='background:#ffb74d'></span>200-250K</div>
-    <div class='legend-item'><span class='legend-color' style='background:#64b5f6'></span>250-300K</div>
-    <div class='legend-item'><span class='legend-color' style='background:#81c784'></span>> 300K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#E0F7FA'></span>< 200K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#4DD0E1'></span>200-250K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#00ACC1'></span>250-300K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#006064'></span>> 300K</div>
 </div>
 
 <script>
@@ -308,10 +308,10 @@ var cities = [
 ];
 
 function getColor(salary) {
-    if (salary < 200000) return '#ffeb3b';
-    if (salary < 250000) return '#ffb74d';
-    if (salary < 300000) return '#64b5f6';
-    return '#81c784';
+    if (salary < 200000) return '#E0F7FA';
+    if (salary < 250000) return '#4DD0E1';
+    if (salary < 300000) return '#00ACC1';
+    return '#006064';
 }
 
 function getSize(count) {
