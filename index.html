@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <title>Карта зарплат IT в России</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
+    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500&display=swap" rel="stylesheet">
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet'>
     <style>
@@ -156,6 +157,36 @@
             font-weight: 500;
             color: #2c3e50;
         }
+        .popup-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: auto;
+            background: #0D0D0D;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+            font-family: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            outline: none;
+            border: none;
+        }
+        .popup-button:hover {
+            background: #2c3e50;
+        }
+        .popup-button:focus {
+            outline: none;
+        }
+        .popup-button-icon {
+            width: 16px;
+            height: 16px;
+        }
         .legend {
             background: white;
             padding: 15px;
@@ -185,61 +216,105 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            background: white;
-            padding: 16px 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1;
-            max-width: 280px;
+            max-width: 400px;
         }
         .header-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin: 0 0 4px 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 32px;
+            font-weight: 500;
+            margin: 0 0 8px 0;
+            white-space: nowrap;
+            font-family: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         .header-subtitle {
-            font-size: 13px;
-            color: #7f8c8d;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0 0 4px 0;
+            line-height: 120%;
+            white-space: nowrap;
+            font-family: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header-button {
+            display: inline-block;
+            background: #1E5459;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 12px;
+            transition: background 0.2s;
+            font-family: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header-button:hover {
+            background: #163f43;
         }
         .footer {
             position: absolute;
-            bottom: 40px;
-            left: 20px;
-            z-index: 1;
-            background: #EFF0F2;
-            padding: 8px;
-            border-radius: 8px;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 0 8px 0 0;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
         }
         .footer-logo {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             display: block;
         }
-        .footer a {
+        .footer-text {
             font-size: 14px;
+            font-weight: 500;
+            color: #0D0D0D;
+            margin: 0;
+            font-family: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .footer a {
             text-decoration: none;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: opacity 0.2s;
          }
-        .footer a:visited {
-            color: inherit;  
-        }
         .footer a:hover {
             opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                max-width: calc(100vw - 40px);
+            }
+            .header-title {
+                font-size: 24px;
+                white-space: normal;
+            }
+            .header-subtitle {
+                font-size: 12px;
+                white-space: normal;
+            }
+            .header-button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
 <body>
+<div class='header' id='pageHeader'>
+    <h1 class='header-title'>Зарплаты разработчиков 2026</h1>
+    <p class='header-subtitle'>Медианные зарплаты разработчиков за 2025-26 год.</p>
+    <p class='header-subtitle'>Last updated 04.01.2026</p>
+    <a href='https://t.me/gradesTrackerBot/grades?startapp=map' target='_blank' class='header-button'>Добавить свою ЗП</a>
+</div>
 <div class='footer'>
-    <a href='http://t.me/gradesTrackerBot' target='_blank'>
+    <a href='https://getgrade.ru/devsalaries' target='_blank'>
         <img src='https://api.getgrade.ru/uploads/grades_logo_site_6e05603f0e.svg' alt='Grades' class='footer-logo'>
+        <span class='footer-text'>made by Grades</span>
     </a>
 </div>
 <div id='map'></div>
@@ -268,19 +343,19 @@ var cities = [
     {name: 'Dubai', salary: 660000, count: 2, lng: 55.2708, lat: 25.2048,
      stacks: ['бэкенд', 'mobile (iOS, Android)'],
      companies: ['Careem', 'Sports.ru']},
-    {name: 'Алматы', salary: 292000, count: 6, lng: 76.8512, lat: 43.2220,
+    {name: 'Almaty', salary: 292000, count: 6, lng: 76.8512, lat: 43.2220,
      stacks: ['Java Backend', 'mobile (iOS, Android)', 'Oracle'],
      companies: ['Aviata', 'Freedom finance', 'Halyk Bank']},
-    {name: 'Тбилиси', salary: 439000, count: 4, lng: 44.8337, lat: 41.7151,
+    {name: 'Tbilisi', salary: 439000, count: 4, lng: 44.8337, lat: 41.7151,
      stacks: ['Java Backend', 'react', 'next', 'backend'],
      companies: ['PwC', 'Vizyoneks']},
-    {name: 'Ташкент', salary: 335000, count: 2, lng: 69.2401, lat: 41.2995,
+    {name: 'Tashkent', salary: 335000, count: 2, lng: 69.2401, lat: 41.2995,
      stacks: ['backend', 'frontend'],
      companies: ['Т-Банк', 'Uzum']},
-    {name: 'Минск', salary: 160000, count: 3, lng: 27.5615, lat: 53.9006,
+    {name: 'Minsk', salary: 160000, count: 3, lng: 27.5615, lat: 53.9006,
      stacks: ['DevOps', 'react', 'next'],
      companies: ['Burger King', 'Itransition', 'Modsen']},
-    {name: 'Ереван', salary: 561000, count: 2, lng: 44.5152, lat: 40.1872,
+    {name: 'Yerevan', salary: 561000, count: 2, lng: 44.5152, lat: 40.1872,
      stacks: ['CPU', 'Java Backend'],
      companies: ['Syntacore']},
     {name: 'Тюмень', salary: 430750, count: 2, lng: 65.5272, lat: 57.1522,
@@ -417,14 +492,38 @@ map = new mapboxgl.Map({
 });
 
 map.on('load', function() {
+    // Делаем стандартные лейблы городов полупрозрачными (20%)
+    var labelsToFade = [
+        'settlement-subdivision-label',
+        'settlement-minor-label', 
+        'settlement-major-label',
+        'state-label',
+        'country-label'
+    ];
+    
+    labelsToFade.forEach(function(label) {
+        if (map.getLayer(label)) {
+            map.setPaintProperty(label, 'text-opacity', 0.2);
+        }
+    });
+    
     var topTwoCities = ['Москва', 'Санкт-Петербург'];
-    var topFiveCities = ['Москва', 'Санкт-Петербург', 'Dubai', 'Тбилиси', 'Тюмень'];
+    var topFiveCities = ['Москва', 'Санкт-Петербург', 'Dubai', 'Tbilisi', 'Екатеринбург', 'Новосибирск', 'Казань'];
     
     var textColor = isDark ? '#FFFFFF' : '#0D0D0D';
     var subtextColor = isDark ? '#B0B0B0' : '#7f8c8d';
     var titleTextShadow = isDark ? 'none' : '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 -1px 0 #fff, 0 1px 0 #fff, -1px 0 0 #fff, 1px 0 0 #fff';
     
-    // Устанавливаем цвет для футера (убираем, так как теперь только лого)
+    // Устанавливаем цвет для header
+    var header = document.getElementById('pageHeader');
+    if (header) {
+        var headerTitle = header.querySelector('.header-title');
+        var headerSubtitles = header.querySelectorAll('.header-subtitle');
+        if (headerTitle) headerTitle.style.color = textColor;
+        headerSubtitles.forEach(function(subtitle) {
+            subtitle.style.color = textColor;
+        });
+    }
     
     cities.forEach(function(city) {
         var container = document.createElement('div');
@@ -490,6 +589,12 @@ map.on('load', function() {
                 '<div class="popup-count">На основе ' + city.count + ' записей</div>' +
             '</div>' +
             '<div class="popup-body">' +
+                '<a href="https://getgrade.ru/devsalaries" target="_blank" class="popup-button">' +
+                    '<svg class="popup-button-icon" viewBox="0 0 289 216" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                        '<path d="M19.785 93.1578C97.3411 62.77 148.981 42.581 174.915 32.7813C248.711 4.99524 264.219 0.208135 274.192 0C276.402 0 281.293 0.398925 284.6 2.79248C287.263 4.80445 287.942 7.38879 288.377 9.40076C288.812 11.3954 289.265 15.5928 288.812 18.7842C284.826 56.7688 267.543 148.938 258.684 191.311C254.907 209.314 247.597 215.316 240.514 215.905C224.988 217.102 213.258 206.713 198.394 197.919C174.915 184.13 161.844 175.527 139.008 161.929C112.64 146.336 129.697 137.751 144.769 123.754C148.755 120.146 216.791 64.175 218.131 59.1797C218.34 58.5727 218.34 56.1791 216.791 54.9823C215.242 53.7856 213.031 54.1845 211.256 54.5834C208.819 54.9823 171.59 77.3742 99.1164 121.551C88.482 128.142 78.9615 131.351 70.3113 131.142C60.7734 130.952 42.6027 126.355 28.8703 122.349C12.2486 117.544 -1.04868 114.96 0.0652293 106.548C0.726615 102.16 7.37528 97.7541 19.785 93.1578Z" fill="white"/>' +
+                    '</svg>' +
+                    'Смотреть все ЗП' +
+                '</a>' +
                 '<div class="popup-section">' +
                     '<div class="popup-section-title">Топ специализации</div>' +
                     '<div class="popup-tags">' + stacksHTML + '</div>' +
