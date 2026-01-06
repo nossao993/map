@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>Карта зарплат IT-специалистов 2026 | Grades</title>
+    <title>Карта зарплат IT в России</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'>
     <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500&display=swap" rel="stylesheet">
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
@@ -308,7 +309,7 @@
 <div class='header' id='pageHeader'>
     <h1 class='header-title'>Зарплаты разработчиков 2026</h1>
     <p class='header-subtitle'>Медианные зарплаты разработчиков за 2025-26 год.</p>
-    <p class='header-subtitle'>Last updated 04.01.2026</p>
+    <p class='header-subtitle'>Last updated 06.01.2026</p>
     <a href='https://t.me/gradesTrackerBot/grades?startapp=map' target='_blank' class='header-button'>Добавить свою ЗП</a>
 </div>
 <div class='footer'>
@@ -334,111 +335,207 @@ var isDark = hour >= 20 || hour < 6;
 var mapStyle = isDark ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/light-v11';
 
 var cities = [
-    {name: 'Москва', salary: 307500, count: 280, lng: 37.6173, lat: 55.7558,
-     stacks: ['react', 'DevOps', 'Java Backend'],
-     companies: ['VK', 'Яндекс', 'Сбер']},
-    {name: 'Санкт-Петербург', salary: 300000, count: 107, lng: 30.3351, lat: 59.9343,
-     stacks: ['mobile (iOS, Android)', 'DevOps', 'Java Backend'],
-     companies: ['Яндекс', 'Т-Банк', 'VK']},
     {name: 'Dubai', salary: 660000, count: 2, lng: 55.2708, lat: 25.2048,
-     stacks: ['бэкенд', 'mobile (iOS, Android)'],
+     stacks: ['mobile (iOS, Android)', 'backend'],
      companies: ['Careem', 'Sports.ru']},
-    {name: 'Almaty', salary: 292000, count: 6, lng: 76.8512, lat: 43.2220,
-     stacks: ['Java Backend', 'mobile (iOS, Android)', 'Oracle'],
-     companies: ['Aviata', 'Freedom finance', 'Halyk Bank']},
-    {name: 'Tbilisi', salary: 439000, count: 4, lng: 44.8337, lat: 41.7151,
-     stacks: ['Java Backend', 'react', 'next', 'backend'],
-     companies: ['PwC', 'Vizyoneks']},
+    {name: 'Limassol', salary: 500000, count: 1, lng: 33.0379, lat: 34.6841,
+     stacks: ['mobile (iOS, Android)'],
+     companies: ['InDrive']},
+    {name: 'Valencia', salary: 260000, count: 1, lng: -0.3763, lat: 39.4699,
+     stacks: ['Java Backend'],
+     companies: ['T-Systems']},
+    {name: 'Almaty', salary: 258000, count: 7, lng: 76.8512, lat: 43.222,
+     stacks: ['mobile (iOS, Android)', 'frontend', 'Web'],
+     companies: ['Т-Банк', 'Halyk Bank', 'Aviata']},
+    {name: 'Барнаул', salary: 180000, count: 1, lng: 83.7798, lat: 53.3481,
+     stacks: ['Web'],
+     companies: ['НОВЭКС']},
+    {name: 'Belgrad', salary: 400000, count: 1, lng: 20.4489, lat: 44.7866,
+     stacks: ['DevOps'],
+     companies: ['Voctiv']},
+    {name: 'Брянск', salary: 150000, count: 3, lng: 34.364, lat: 53.2521,
+     stacks: ['Java Backend', 'backend'],
+     companies: ['Кликмедиа', 'Сбербанк', 'Альфа-Банк']},
+    {name: 'Владивосток', salary: 202000, count: 4, lng: 131.8736, lat: 43.1056,
+     stacks: ['backend', 'Микросервисная архитектура', 'react'],
+     companies: ['РТК ИТ', 'DNS', 'hkl']},
+    {name: 'Владимир', salary: 150000, count: 1, lng: 40.4069, lat: 56.1296,
+     stacks: ['backend'],
+     companies: ['Сервисхаб']},
+    {name: 'Волгоград', salary: 380000, count: 5, lng: 44.5133, lat: 48.708,
+     stacks: ['Java Backend', 'ASP.NET Core', 'DevOps'],
+     companies: ['Т-Банк', 'ПочтаТех', 'Artsofte']},
+    {name: 'Вологда', salary: 350000, count: 1, lng: 39.8833, lat: 59.2167,
+     stacks: ['Java Backend'],
+     companies: ['Альфа-Банк']},
+    {name: 'Воронеж', salary: 320000, count: 15, lng: 39.2003, lat: 51.672,
+     stacks: ['DevOps', 'Java Backend', 'backend'],
+     companies: ['БЮРО 1440', 'Angels IT', 'IT-one']},
+    {name: 'Дубна', salary: 569500, count: 2, lng: 37.1667, lat: 56.7333,
+     stacks: ['Микросервисная архитектура'],
+     companies: ['МТС', 'Криптонит']},
+    {name: 'Екатеринбург', salary: 220000, count: 29, lng: 60.6122, lat: 56.8389,
+     stacks: ['backend', 'react', 'DevOps'],
+     companies: ['Т-Банк', 'АО "ПФ "СКБ КОНТУР"', 'Сбер']},
+    {name: 'Ереван', salary: 457500, count: 2, lng: 44.5152, lat: 40.1872,
+     stacks: ['Java Backend', 'CPU'],
+     companies: ['Т-Банк', 'Syntacore']},
+    {name: 'Иваново', salary: 325000, count: 2, lng: 40.9734, lat: 57.0004,
+     stacks: ['Vue js'],
+     companies: ['РобоФинанс']},
+    {name: 'Ижевск', salary: 320000, count: 4, lng: 53.2001, lat: 56.8498,
+     stacks: ['Java Backend', 'mobile (iOS, Android)', 'react'],
+     companies: ['ВТБ', 'Банк ПСБ', 'Sarex']},
+    {name: 'Иннополис', salary: 240000, count: 1, lng: 48.745, lat: 55.7533,
+     stacks: ['react'],
+     companies: ['Т-Банк']},
+    {name: 'Казань', salary: 200000, count: 19, lng: 49.1221, lat: 55.7887,
+     stacks: ['backend', 'Java Backend', 'DevOps'],
+     companies: ['OZON', 'Aston', 'БАНК РОССИИ']},
+    {name: 'Калининград', salary: 300000, count: 3, lng: 20.4522, lat: 54.7104,
+     stacks: ['Web/mobile', 'Vue js', 'Микросервисная архитектура'],
+     companies: ['RIS', 'ITSpecial', 'Ozon Tech']},
+    {name: 'Калуга', salary: 85000, count: 1, lng: 36.2754, lat: 54.5293,
+     stacks: ['backend'],
+     companies: ['Алгонт']},
+    {name: 'Киев', salary: 470000, count: 1, lng: 30.5234, lat: 50.4501,
+     stacks: ['react'],
+     companies: ['synergetica']},
+    {name: 'Киров', salary: 310000, count: 3, lng: 49.6601, lat: 58.6035,
+     stacks: ['react', 'Node.js', 'Java Backend'],
+     companies: ['Бэлл Интегратор', 'Философт', 'sol tech']},
+    {name: 'Кострома', salary: 355000, count: 1, lng: 40.9269, lat: 57.7679,
+     stacks: ['Java Backend'],
+     companies: ['Rambler &Co']},
+    {name: 'Краснодар', salary: 235000, count: 7, lng: 38.9769, lat: 45.0355,
+     stacks: ['Java Backend', 'API', 'Vue js'],
+     companies: ['Клерк.ру', 'SM Lab', 'Т-Банк']},
+    {name: 'Красноярск', salary: 300000, count: 4, lng: 92.8672, lat: 56.0153,
+     stacks: ['Web', '1С', 'Python'],
+     companies: ['ООО Континент', 'VK', 'Полюс']},
+    {name: 'Курган', salary: 255000, count: 2, lng: 65.3333, lat: 55.45,
+     stacks: ['react', 'flutter'],
+     companies: ['Wildberries', 'Maxim technology']},
+    {name: 'Курск', salary: 260000, count: 1, lng: 36.1873, lat: 51.7373,
+     stacks: ['API'],
+     companies: ['Diasoft']},
+    {name: 'Липецк', salary: 185000, count: 2, lng: 39.5705, lat: 52.6031,
+     stacks: ['Web', 'Angular'],
+     companies: ['МедСофт', 'Иннотех']},
+    {name: 'Махачкала', salary: 100000, count: 1, lng: 47.5047, lat: 42.9849,
+     stacks: ['backend'],
+     companies: ['Wildberries']},
+    {name: 'Minsk', salary: 135000, count: 6, lng: 27.5615, lat: 53.9006,
+     stacks: ['DevOps', 'react, next', 'react'],
+     companies: ['Itransition', 'Burger King', 'Modsen']},
+    {name: 'Монреаль', salary: 642500, count: 1, lng: -73.5673, lat: 45.5017,
+     stacks: ['PHP'],
+     companies: ['Wellnessliving']},
+    {name: 'Москва', salary: 300000, count: 335, lng: 37.6173, lat: 55.7558,
+     stacks: ['backend', 'Java Backend', 'DevOps'],
+     companies: ['Сбер', 'Яндекс', 'VK']},
+    {name: 'Набережные Челны', salary: 250000, count: 1, lng: 52.4078, lat: 55.743,
+     stacks: ['react'],
+     companies: ['Kamaz Digital']},
+    {name: 'Невинномысск', salary: 290000, count: 1, lng: 41.9333, lat: 44.6333,
+     stacks: ['Node.js'],
+     companies: ['R-Vision']},
+    {name: 'Нижневартовск', salary: 160000, count: 1, lng: 76.5531, lat: 60.9344,
+     stacks: ['backend'],
+     companies: ['Газпром-нефть ЦР']},
+    {name: 'Нижний Новгород', salary: 247000, count: 16, lng: 44.002, lat: 56.2965,
+     stacks: ['backend', 'API', 'PHP'],
+     companies: ['YADRO', 'Криптонит', 'ООО STM']},
+    {name: 'Новосибирск', salary: 240000, count: 23, lng: 82.9346, lat: 55.0084,
+     stacks: ['backend', 'DevOps', 'Java Backend'],
+     companies: ['ЦФТ', 'CDEK', 'Рунити']},
+    {name: 'Обнинск', salary: 220000, count: 1, lng: 36.6172, lat: 55.095,
+     stacks: ['Микросервисная архитектура'],
+     companies: ['Addcode']},
+    {name: 'Омск', salary: 326000, count: 4, lng: 73.3686, lat: 54.9885,
+     stacks: ['Java Backend', 'DevOps', 'backend'],
+     companies: ['ГК Иннотех', 'Райффайзен Банк', 'Magnit']},
+    {name: 'Оренбург', salary: 360000, count: 1, lng: 55.0988, lat: 51.7727,
+     stacks: ['Java Backend'],
+     companies: ['ГК Иннотех']},
+    {name: 'Пенза', salary: 200000, count: 3, lng: 45.0182, lat: 53.195,
+     stacks: ['Java Backend', 'C'],
+     companies: ['Детмир Тех', 'ТРЭИ', '-----']},
+    {name: 'Пермь', salary: 220000, count: 9, lng: 56.2502, lat: 58.0105,
+     stacks: ['Java Backend', 'backend', 'Python'],
+     companies: ['Газпромбанк', 'Spectr', 'Норбит']},
+    {name: 'Петрозаводск', salary: 225000, count: 1, lng: 34.3469, lat: 61.7849,
+     stacks: ['Java Backend'],
+     companies: ['custis']},
+    {name: 'Пятигорск', salary: 206000, count: 1, lng: 43.0594, lat: 44.0487,
+     stacks: ['backend'],
+     companies: ['Монитор Электрик']},
+    {name: 'Ростов-на-Дону', salary: 200000, count: 10, lng: 39.7233, lat: 47.2357,
+     stacks: ['Java Backend', 'Node.js', 'Web'],
+     companies: ['Axenix', 'Лемана ПРО', 'Лизинговая компания']},
+    {name: 'Рыбинск', salary: 250000, count: 1, lng: 38.8275, lat: 58.0446,
+     stacks: ['Java Backend'],
+     companies: ['НПО Криста']},
+    {name: 'Рязань', salary: 132500, count: 4, lng: 39.7129, lat: 54.6269,
+     stacks: ['1С', 'backend', 'Vue js'],
+     companies: ['ООО НПП Тепловодохран', 'Prof-IT Group', 'Айтигро']},
+    {name: 'Самара', salary: 272000, count: 7, lng: 50.1155, lat: 53.1952,
+     stacks: ['Oracle', 'backend', 'Web/mobile'],
+     companies: ['IFellow', 'VK', 'WSCloud']},
+    {name: 'Санкт-Петербург', salary: 289500, count: 128, lng: 30.3351, lat: 59.9343,
+     stacks: ['backend', 'Java Backend', 'DevOps'],
+     companies: ['Т-Банк', 'VK', 'Яндекс']},
+    {name: 'Саранск', salary: 60500, count: 1, lng: 45.1749, lat: 54.1838,
+     stacks: ['Vue js'],
+     companies: ['iTrack']},
+    {name: 'Саратов', salary: 210000, count: 2, lng: 46.0086, lat: 51.5924,
+     stacks: ['react', 'Java Backend'],
+     companies: ['X5 tech', 'Совкомбанк Технологии']},
+    {name: 'Севастополь', salary: 250000, count: 2, lng: 33.5167, lat: 44.6167,
+     stacks: ['.Net', 'C#'],
+     companies: ['Юрент']},
+    {name: 'Симферополь', salary: 180000, count: 1, lng: 34.1024, lat: 44.9521,
+     stacks: ['DevOps'],
+     companies: ['ecom.tech']},
+    {name: 'Смоленск', salary: 90000, count: 2, lng: 32.0401, lat: 54.7818,
+     stacks: ['frontend', 'Java Backend'],
+     companies: ['IT Grade', 'ediweb']},
+    {name: 'Ставрополь', salary: 160000, count: 3, lng: 41.9734, lat: 45.0428,
+     stacks: ['SwiftUI', 'Java Backend', 'frontend'],
+     companies: ['Aezakmi group', 'Softline', 'Инфоком-С']},
+    {name: 'Тамбов', salary: 300000, count: 1, lng: 41.4525, lat: 52.7214,
+     stacks: ['Python'],
+     companies: ['Astralab']},
     {name: 'Tashkent', salary: 335000, count: 2, lng: 69.2401, lat: 41.2995,
      stacks: ['backend', 'frontend'],
      companies: ['Т-Банк', 'Uzum']},
-    {name: 'Minsk', salary: 160000, count: 3, lng: 27.5615, lat: 53.9006,
-     stacks: ['DevOps', 'react', 'next'],
-     companies: ['Burger King', 'Itransition', 'Modsen']},
-    {name: 'Yerevan', salary: 561000, count: 2, lng: 44.5152, lat: 40.1872,
-     stacks: ['CPU', 'Java Backend'],
-     companies: ['Syntacore']},
-    {name: 'Тюмень', salary: 430750, count: 2, lng: 65.5272, lat: 57.1522,
-     stacks: ['backend', 'Full Stack'],
+    {name: 'Tbilisi', salary: 450000, count: 5, lng: 44.8337, lat: 41.7151,
+     stacks: ['backend', 'react, next', 'Java Backend'],
+     companies: ['nda, eu', 'Vizyoneks', 'PwC']},
+    {name: 'Томск', salary: 230000, count: 5, lng: 84.948, lat: 56.4977,
+     stacks: ['backend', 'frontend', 'Web'],
+     companies: ['ООО НТР Томск', 'Softline', 'Газпром ЦПС']},
+    {name: 'Тюмень', salary: 380000, count: 2, lng: 65.5272, lat: 57.1522,
+     stacks: ['backend', 'Fullstack'],
      companies: ['Авито', 'OIS']},
-    {name: 'Омск', salary: 416000, count: 3, lng: 73.3686, lat: 54.9885,
-     stacks: ['backend', 'DevOps', 'Java Backend'],
-     companies: ['ГК Иннотех', 'Райффайзен Банк', 'Magnit']},
-    {name: 'Калининград', salary: 420000, count: 3, lng: 20.4522, lat: 54.7104,
-     stacks: ['Микросервисная архитектура', 'Vue js', 'Web/mobile'],
-     companies: ['ITSpecial', 'Ozon Tech', 'RIS']},
-    {name: 'Воронеж', salary: 350000, count: 11, lng: 39.2003, lat: 51.6720,
-     stacks: ['Next js', 'react', 'Java Backend'],
-     companies: ['Сбер', 'Совкомбанк Технологии', 'Т-Банк']},
-    {name: 'Волгоград', salary: 371500, count: 4, lng: 44.5133, lat: 48.7080,
-     stacks: ['ASP.NET Core', 'backend', 'DevOps'],
-     companies: ['ПочтаТех', 'Т-Банк', 'Artsofte']},
-    {name: 'Ижевск', salary: 360000, count: 4, lng: 53.2001, lat: 56.8498,
-     stacks: ['Java Backend', 'mobile (iOS, Android)', 'react'],
-     companies: ['Банк ПСБ', 'ВТБ', 'icons8']},
-    {name: 'Екатеринбург', salary: 255000, count: 24, lng: 60.6122, lat: 56.8389,
-     stacks: ['Web', 'Java Backend', 'react'],
-     companies: ['АО "ПФ "СКБ КОНТУР"', 'БАНК РОССИИ', 'Т-Банк']},
-    {name: 'Казань', salary: 190000, count: 16, lng: 49.1221, lat: 55.7887,
-     stacks: ['Web/mobile', 'DevOps', 'Java Backend'],
-     companies: ['Иксон Девелопмент', 'Лаборатория измерительных систем', 'Промэнерго']},
-    {name: 'Киров', salary: 320000, count: 3, lng: 49.6601, lat: 58.6035,
-     stacks: ['Java Backend', 'Node.js', 'react'],
-     companies: ['Бэлл Интегратор', 'Философт', 'sol tech']},
-    {name: 'Краснодар', salary: 295000, count: 6, lng: 38.9769, lat: 45.0355,
-     stacks: ['Oracle', 'Vue js', 'Java Backend'],
-     companies: ['ЖилфондСервис', 'Клерк.ру', 'SM Lab']},
-    {name: 'Красноярск', salary: 300000, count: 4, lng: 92.8672, lat: 56.0153,
-     stacks: ['1С', 'Python', 'Web'],
-     companies: ['ООО Континент', 'Полюс', 'Tevian']},
-    {name: 'Нижний Новгород', salary: 272500, count: 12, lng: 44.0020, lat: 56.2965,
-     stacks: ['Go', 'API', 'backend'],
-     companies: ['Т-Банк', 'telerion', 'YADRO']},
-    {name: 'Новосибирск', salary: 240000, count: 20, lng: 82.9346, lat: 55.0084,
-     stacks: ['Web', 'DevOps', 'Java Backend'],
-     companies: ['Wildberries', 'X5 Group', 'ЦФТ']},
-    {name: 'Пермь', salary: 220000, count: 5, lng: 56.2502, lat: 58.0105,
-     stacks: ['Linux', 'Python', 'Java Backend'],
-     companies: ['Газпромбанк', 'Норбит', 'РТМИС']},
-    {name: 'Ростов-на-Дону', salary: 210000, count: 8, lng: 39.7233, lat: 47.2357,
-     stacks: ['Angular', 'Python', 'react'],
-     companies: ['НПЦ КОСМОС2', 'Лемана ПРО', 'Axenix']},
-    {name: 'Самара', salary: 316000, count: 6, lng: 50.1155, lat: 53.1952,
-     stacks: ['C++', 'Java Backend', 'Node.js'],
-     companies: ['Мой Офис', 'МТС финтех', 'Clickgroup']},
-    {name: 'Томск', salary: 230000, count: 5, lng: 84.9480, lat: 56.4977,
-     stacks: ['frontend', 'Web', 'backend'],
-     companies: ['Aurigma', 'Quantumsoft', 'Softline']},
-    {name: 'Ульяновск', salary: 190000, count: 4, lng: 48.3866, lat: 54.3142,
-     stacks: ['backend', 'Java Backend', 'spring boot'],
-     companies: ['Дион Софт', 'IRLIX', 'MediaSoft']},
-    {name: 'Уфа', salary: 92500, count: 6, lng: 55.9678, lat: 54.7388,
-     stacks: ['backend', 'C#', 'Web'],
-     companies: ['Газпром-нефть ЦР', 'ГК БИТ', 'ООО Викад']},
-    {name: 'Чебоксары', salary: 310000, count: 2, lng: 47.2486, lat: 56.1439,
-     stacks: ['Golang', 'react'],
-     companies: ['Иннотех', 'OZON']},
-    {name: 'Ярославль', salary: 207500, count: 2, lng: 39.8845, lat: 57.6263,
-     stacks: ['1С', 'full stack'],
-     companies: ['Газпром-нефть ЦР', 'Areal']},
-    {name: 'Брянск', salary: 105000, count: 2, lng: 34.3640, lat: 53.2521,
-     stacks: ['backend', 'Java Backend'],
-     companies: ['Кликмедиа', 'Сбербанк']},
-    {name: 'Владивосток', salary: 162000, count: 2, lng: 131.8736, lat: 43.1056,
-     stacks: ['Микросервисная архитектура', 'backend'],
-     companies: ['РТК ИТб', 'DNS']},
-    {name: 'Липецк', salary: 185000, count: 2, lng: 39.5705, lat: 52.6031,
-     stacks: [],
-     companies: []},
-    {name: 'Рязань', salary: 110000, count: 3, lng: 39.7129, lat: 54.6269,
-     stacks: ['1С', 'backend', 'Vue js'],
-     companies: ['Айтигро', 'ГК Автоимпорт', 'ООО НПП Тепловодохран']},
-    {name: 'Саратов', salary: 220000, count: 2, lng: 46.0086, lat: 51.5924,
-     stacks: ['Java Backend', 'react'],
-     companies: ['Совкомбанк Технологии', 'X5 tech']},
-    {name: 'Ставрополь', salary: 160000, count: 3, lng: 41.9734, lat: 45.0428,
-     stacks: ['frontend', 'Java Backend', 'SwiftUI'],
-     companies: ['Инфоком-С', 'Aezakmi group', 'Softline']}
+    {name: 'Ульяновск', salary: 175000, count: 4, lng: 48.3866, lat: 54.3142,
+     stacks: ['Web', 'spring boot', 'backend'],
+     companies: ['Дион Софт', 'Oneliya', 'MediaSoft']},
+    {name: 'Уфа', salary: 90000, count: 6, lng: 55.9678, lat: 54.7388,
+     stacks: ['Web', 'C#', 'backend'],
+     companies: ['ГК БИТ', 'ЭОС', 'ООО Викад']},
+    {name: 'Чебоксары', salary: 270000, count: 2, lng: 47.2486, lat: 56.1439,
+     stacks: ['Go', 'react'],
+     companies: ['OZON', 'Иннотех']},
+    {name: 'Челябинск', salary: 200000, count: 1, lng: 61.4368, lat: 55.1644,
+     stacks: ['.Net'],
+     companies: ['Сигма']},
+    {name: 'Ярославль', salary: 180000, count: 5, lng: 39.8845, lat: 57.6263,
+     stacks: ['1С', 'Fullstack', 'Функциональное тестирование'],
+     companies: ['Тензор', 'Газпром-нефть ЦР', 'Areal']},
+    {name: 'Йошкар-ола', salary: 200000, count: 1, lng: 47.8748, lat: 56.6312,
+     stacks: ['backend'],
+     companies: ['Фитмост']}
 ];
 
 function getColor(salary) {
@@ -1169,7 +1266,7 @@ map.on('load', function() {
         });
     });
     
-    function updateLabelsVisibility() {
+function updateLabelsVisibility() {
         var zoom = map.getZoom();
         
         cities.forEach(function(city) {
@@ -1178,14 +1275,26 @@ map.on('load', function() {
             
             markers.forEach(function(label) {
                 var labelCity = label.querySelector('.marker-label-city').textContent;
+                var salaryLabel = label.querySelector('.marker-label-salary'); 
                 
-                if (zoom < 3) {
+                // Работаем только с лейблом этого города
+                if (labelCity !== cityName) {
+                    return;
+                }
+                
+                // Города с <5 зарплат показываем только на больших зумах
+                if (city.count < 5 && zoom < 6) {
+                    label.style.display = 'none';
+                    return;
+                }
+                
+                if (zoom < 3.5) {
                     if (topTwoCities.indexOf(labelCity) !== -1) {
                         label.style.display = 'flex';
                     } else {
                         label.style.display = 'none';
                     }
-                } else if (zoom >= 3 && zoom < 4) {
+                } else if (zoom >= 3.5 && zoom < 4.5) {
                     if (topFiveCities.indexOf(labelCity) !== -1) {
                         label.style.display = 'flex';
                     } else {
@@ -1193,6 +1302,15 @@ map.on('load', function() {
                     }
                 } else {
                     label.style.display = 'flex';
+                }
+                
+                // Скрываем количество зарплат на малых зумах
+                if (salaryLabel) {
+                    if (zoom < 4) {
+                        salaryLabel.style.display = 'none';
+                    } else {
+                        salaryLabel.style.display = 'block';
+                    }
                 }
             });
         });
