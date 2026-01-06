@@ -22,9 +22,9 @@
         }
         .marker {
             cursor: pointer;
-            border: 2px solid white;
+            border: 1px solid white;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
             transition: transform 0.2s;
         }
         .marker:hover {
@@ -1176,8 +1176,8 @@ map.on('load', function() {
         el.className = 'marker';
         var size = getSize(city.count);
         var color = getColor(city.salary);
-        el.style.width = size + 'px';
-        el.style.height = size + 'px';
+        el.style.width = (size * 0.85) + 'px';
+        el.style.height = (size * 0.85) + 'px';
         el.style.backgroundColor = color;
         el.style.position = 'absolute';
         el.style.left = '50%';
@@ -1271,16 +1271,15 @@ function updateLabelsVisibility() {
             var markers = document.querySelectorAll('.marker-label');
             
             markers.forEach(function(label) {
+
                 var labelCity = label.querySelector('.marker-label-city').textContent;
                 var salaryLabel = label.querySelector('.marker-label-salary'); 
                 
-                // Работаем только с лейблом этого города
                 if (labelCity !== cityName) {
                     return;
                 }
                 
-                // Города с <5 зарплат показываем только на больших зумах
-                if (city.count < 5 && zoom < 6) {
+                if (city.count < 4 && zoom < 5) {
                     label.style.display = 'none';
                     return;
                 }
@@ -1301,7 +1300,6 @@ function updateLabelsVisibility() {
                     label.style.display = 'flex';
                 }
                 
-                // Скрываем количество зарплат на малых зумах
                 if (salaryLabel) {
                     if (zoom < 4) {
                         salaryLabel.style.display = 'none';
