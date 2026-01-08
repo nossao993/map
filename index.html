@@ -237,7 +237,7 @@
         }
         .header-button {
             display: inline-block;
-            background: #1E5459;
+            background: #1254C7;
             color: white;
             padding: 10px 18px;
             border-radius: 8px;
@@ -308,7 +308,8 @@
 <body>
 <div class='header' id='pageHeader'>
     <h1 class='header-title'>Зарплаты разработчиков 2026</h1>
-    <p class='header-subtitle'>Медианные зарплаты разработчиков за 2025-26 год.</p>
+    <p class='header-subtitle'>Медианные зарплаты разработчиков за 2025-26 год. </p>
+    <p class='header-subtitle'>Сравните зарплаты по городам, специализациям и компаниям.</p>
     <p class='header-subtitle'>Last updated 06.01.2026</p>
     <a href='https://t.me/gradesTrackerBot/grades?startapp=map' target='_blank' class='header-button'>Добавить свою ЗП</a>
 </div>
@@ -321,10 +322,11 @@
 <div id='map'></div>
 <div class='legend'>
     <h4>Медианная зарплата</h4>
-    <div class='legend-item'><span class='legend-color' style='background:#CCF7FF'></span>< 200K</div>
-    <div class='legend-item'><span class='legend-color' style='background:#4DD0E1'></span>200-250K</div>
-    <div class='legend-item'><span class='legend-color' style='background:#00ACC1'></span>250-300K</div>
-    <div class='legend-item'><span class='legend-color' style='background:#006064'></span>> 300K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#18BD7F
+'></span>< 200K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#1BA3DC'></span>200-250K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#1254C7'></span>250-300K</div>
+    <div class='legend-item'><span class='legend-color' style='background:#6D47F5'></span>> 300K</div>
 </div>
 
 <script>
@@ -536,10 +538,10 @@ var cities = [
 ];
 
 function getColor(salary) {
-    if (salary < 200000) return '#CCF7FF';
-    if (salary < 250000) return '#4DD0E1';
-    if (salary < 300000) return '#00ACC1';
-    return '#006064';
+    if (salary < 200000) return '#18BD7F';
+    if (salary < 250000) return '#1BA3DC';
+    if (salary < 300000) return '#1254C7';
+    return '#6D47F5';
 }
 
 function getSize(count) {
@@ -1183,7 +1185,7 @@ map.on('load', function() {
         el.style.left = '50%';
         el.style.top = '50%';
         el.style.transform = 'translate(-50%, -50%)';
-        el.style.boxShadow = '0 0 ' + size + 'px ' + (size / 10) + 'px ' + color + ', 0 2px 8px rgba(0,0,0,0.3)';
+        el.style.boxShadow = '0 0 ' + size  + '(size * 0.05) ' + (size / 10) + 'px ' + color + ', 0 2px 8px rgba(0,0,0,0.3)';
         
         container.appendChild(el);
         
